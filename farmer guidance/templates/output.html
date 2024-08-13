@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Output - Crop Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url("{{ url_for('static', filename='backi.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-bottom: 3px solid #007bff;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0;
+        }
+
+        header nav a {
+            color: #f8f9fa;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        header nav a:hover {
+            color: #007bff;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .crop-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .crop-card {
+            flex: 1 1 250px;
+            max-width: 250px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .crop-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            border-bottom: 2px solid #007bff;
+        }
+
+        .crop-name {
+            padding: 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #007bff;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #f8f9fa;
+            padding: 15px 0;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Prediction Result</h1>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('project') }}">Explore Project</a>
+        </nav>
+    </header>
+    <main class="container mt-4">
+        <h2 class="text-center mb-4">Predicted Crops</h2>
+        <div class="crop-container">
+            {% for crop, hindi_name in crops %}
+            <div class="crop-card">
+                <img src="{{ url_for('static', filename='images/crops/' + crop + '.jpg') }}" alt="{{ crop }}" class="crop-img">
+                <p class="crop-name">{{ crop }} ({{ hindi_name }})</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="btn-container">
+            <a class="btn" href="{{ url_for('project') }}">Back to Project</a>
+            <a class="btn" href="{{ url_for('home') }}">Back to Home</a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Crop Prediction. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
